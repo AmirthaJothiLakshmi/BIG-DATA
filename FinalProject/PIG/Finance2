@@ -1,0 +1,14 @@
+a = load '/user/hive/warehouse/sharvin1.db/census2/000000_0' using PigStorage(',') as (age:int, education:chararray,ms:chararray,gender:chararray,taxfiler:chararray,income:double,parents:chararray,cob:chararray,citizenship:chararray,weeks:int);
+
+
+ b = foreach a generate income;   
+
+ c = group b all ;    
+
+ d = foreach c generate SUM(b.income) /COUNT(b.income) as pci ;
+
+ dump d;
+
+
+
+
